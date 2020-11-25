@@ -28,7 +28,7 @@ public class SendMessage {
 	@Scheduled(fixedRate = 1000)
 	public void send() {
 		try {
-			ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("tcp://0.0.0.0:61616");
+			ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("tcp://webbroker:61616");
 	        Connection connection = factory.createConnection("root","1234");
 	        connection.start();
 	
