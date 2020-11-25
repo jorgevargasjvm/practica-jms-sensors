@@ -2,6 +2,9 @@ package com.vargas.PracticaJMSSensors;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 public class Message {
 
 	private LocalDateTime created_at;
@@ -34,5 +37,21 @@ public class Message {
 		this.humidity = humidity;
 	}
     
-    
+	public String getJson(){
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode mensaje = mapper.createObjectNode();
+        mensaje.put("created_at", created_at.toString());
+        mensaje.put("idDevice", idDevice);
+        mensaje.put("temperature", temperature);
+        mensaje.put("humidity", humidity);
+
+        String json = "";
+        try{
+            json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(mensaje);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return json;
+    }
 }
